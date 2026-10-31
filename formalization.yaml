@@ -1,0 +1,53 @@
+version: "v0.4"
+project:
+  name: "Odd zeta values and powers of pi"
+  description: >-
+    Lean proofs of three-Lambert-series formulas for pi^(4m-1), pi^(4m+1),
+    zeta(4m-1) and zeta(4m+1), for m>=1, together with a separate formula
+    for pi and the signs of the rational denominator coefficients.
+  authors: ["Patrick Lopatto"]
+  responsible_maintainers: ["Patrick Lopatto"]
+  license: "Apache-2.0"
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11M06", "11Y60"]
+sources:
+  - title: "Formulas for odd zeta values and powers of pi"
+    authors: ["Marc Chamberland", "Patrick Lopatto"]
+    id: "https://arxiv.org/abs/2406.00567v2"
+    type: "paper"
+    location: "https://arxiv.org/abs/2406.00567v2"
+    relationship: "formalizes"
+    license: "unknown"
+    note: >-
+      The formalization uses a maintainer-supplied local manuscript, not distributed
+      here, with SHA-256 d683b36427ed0d50ca6f1188fc4b394adb58a3fd81702464cd63f81fd6113836.
+related_formalizations: []
+status:
+  scope: >-
+    All six compared principal results are proved. The library also proves the
+    numbered transformations, both quarter-Gamma evaluations, six numerical
+    corollaries and the quantitative even-denominator bound. The six independent
+    Challenge placeholders are excluded from the Solution proof admission count.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: ["propext", "Quot.sound", "Classical.choice"]
+automation:
+  methods:
+    - method: "agent"
+      framework: "Codex"
+      tool_setup: >-
+        Codex developed the proofs in isolated worktrees using Lean Beam and
+        dependency-ordered proof tasks with serial integration. Exact model
+        identifiers were not recorded.
+fidelity:
+  divergences: >-
+    Positive integers use successor indexing. Bernoulli coefficients are rational
+    before explicit casts. Zeta identities use native complex riemannZeta with
+    real right-hand sides cast into the complex numbers.
+review:
+  status: "agent-reviewed"
+  notes: >-
+    Separate Codex agents reviewed paper-to-Lean fidelity and proof integrity.
+    No independent human peer review is claimed. This describes review before
+    submission, not Palomar editorial review.

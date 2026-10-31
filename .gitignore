@@ -1,0 +1,8 @@
+.lake/
+.beam/
+.codex/
+.DS_Store
+*.olean
+*.ilean
+*.trace
+*.log

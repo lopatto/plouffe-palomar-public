@@ -1,0 +1,39 @@
+name: Build and lint
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      LEAN_NUM_THREADS: 2
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: leanprover/lean-action@38fbc41a8c28c4cbaec22d7f7de508ec2e7c0dd9
+        with:
+          auto-config: false
+          build: true
+          build-args: Plouffe Solution
+          test: false
+          lint: false
+          use-mathlib-cache: true
+          use-github-cache: false
+      - name: Build independent Challenge
+        run: lake build Challenge
+      - name: Lint project declarations
+        run: |
+          python3 - <<'PYLINT'
+          import os
+          from pathlib import Path
+          modules = ['Plouffe', 'Solution'] + [
+              '.'.join(p.with_suffix('').parts) for p in sorted(Path('Plouffe').rglob('*.lean'))]
+          (Path(os.environ['RUNNER_TEMP']) / 'plouffe-lint-modules.txt').write_text('\n'.join(modules) + '\n')
+          PYLINT
+          lake env lean --run .lake/packages/batteries/scripts/runLinter.lean --no-build \
+            --only-modules="$RUNNER_TEMP/plouffe-lint-modules.txt" Plouffe Solution

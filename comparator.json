@@ -1,0 +1,19 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "Plouffe.Results.oddPi",
+    "Plouffe.Results.oddZeta",
+    "Plouffe.Results.evenPi",
+    "Plouffe.Results.evenZeta",
+    "Plouffe.Results.piBase",
+    "Plouffe.Results.denominatorSigns"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}
